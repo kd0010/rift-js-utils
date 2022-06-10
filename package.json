@@ -1,0 +1,14 @@
+{
+  "name": "rift-js-utils",
+  "version": "0.2.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "files": [
+    "/dist"
+  ],
+  "scripts": {
+    "build": "rmdir /s /q dist && tsc"
+  }
+}
