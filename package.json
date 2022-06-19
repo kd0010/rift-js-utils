@@ -1,6 +1,6 @@
 {
   "name": "rift-js-utils",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,7 +9,7 @@
     "/dist"
   ],
   "scripts": {
-    "build": "rmdir /s /q dist && tsc"
+    "clean-build": "rmdir /s /q dist && tsc"
   },
   "repository": {
     "type": "git",

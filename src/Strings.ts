@@ -12,6 +12,18 @@ class _Strings {
 
   /**
    * Concatenates all strings provided into one string,
+   * separated by the space character.
+   * 
+   * Ignores nullish values and empty strings.
+   */
+  joinWithSpaces(
+    ...args: (string | number | undefined | null)[]
+  ) {
+    return this.joinWithChar(' ', ...args)
+  }
+
+  /**
+   * Concatenates all strings provided into one string,
    * separated by the desired character.
    * 
    * Ignores nullish values and empty strings.
@@ -30,6 +42,30 @@ class _Strings {
     }
 
     return productSt
+  }
+  
+  /**
+   * Ensures that there will be a desired character
+   * after every target character in a string.
+   */
+  ensureCharAfterChar(
+    st: string,
+    targetChar: string,
+    desiredChar: string,
+  ) {
+    let stringParts = st.split(targetChar)
+    let newStringParts: string[] = []
+    let skipFirst = true
+    for (let st of stringParts) {
+      if (skipFirst) {
+        newStringParts.push(st)
+        skipFirst = false
+        continue
+      }
+      if (st[ 0 ] != desiredChar) newStringParts.push(desiredChar + st)
+      else newStringParts.push(st)
+    }
+    return newStringParts.join(targetChar)
   }
 }
 
