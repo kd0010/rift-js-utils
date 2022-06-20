@@ -4,6 +4,8 @@ export { Colors } from './Constants/Colors'
 // # Helpers
 // ## Array
 export { moveArrItem } from './Helpers/Array/moveArrItem'
+// ## Number
+export { round } from './Helpers/Number/round'
 // ## String
 export { getUniqueId } from './Helpers/String/getUniqueId'
 
