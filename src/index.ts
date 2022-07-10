@@ -1,9 +1,12 @@
+
 // # Constants
 export { Colors } from './Constants/Colors'
 
 // # Helpers
+export { isMappedObject } from './Helpers/isMappedObject'
 // ## Array
 export { moveArrItem } from './Helpers/Array/moveArrItem'
+export { push } from './Helpers/Array/push'
 // ## Number
 export { round } from './Helpers/Number/round'
 // ## String
