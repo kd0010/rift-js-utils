@@ -1,4 +1,3 @@
-
 // # Constants
 export { Colors } from './Constants/Colors'
 
@@ -7,6 +6,8 @@ export { isMappedObject } from './Helpers/isMappedObject'
 // ## Array
 export { moveArrItem } from './Helpers/Array/moveArrItem'
 export { push } from './Helpers/Array/push'
+export { sortAscending } from './Helpers/Array/sortAscending'
+export { sortDescending } from './Helpers/Array/sortDescending'
 // ## Number
 export { round } from './Helpers/Number/round'
 // ## String
