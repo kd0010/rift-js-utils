@@ -1,0 +1,1 @@
+export { isMappedObject } from './isMappedObject'
