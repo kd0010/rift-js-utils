@@ -7,5 +7,5 @@ dist/
 /constants/
 /number/
 /object/
-/preact-hooks/
+/preact/
 /string/

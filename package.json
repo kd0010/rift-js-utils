@@ -1,6 +1,6 @@
 {
   "name": "rift-js-utils",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "",
   "license": "MIT",
   "files": [
@@ -8,7 +8,7 @@
     "/constants",
     "/number",
     "/object",
-    "/preact-hooks",
+    "/preact",
     "/string"
   ],
   "scripts": {

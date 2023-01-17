@@ -26,5 +26,8 @@
 
     // ## Language and Environment
     "target": "es2017",
+    // ### Preact
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
   }
 }
