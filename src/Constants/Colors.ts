@@ -22,6 +22,7 @@ export const Colors = {
     elegantBlue: '#233d63',
     green: '#22b14c',
     lime: '#b5e61d',
+    legoshiGray: '#748980',
   },
   'YinYang': {
     yinBlack: '#090a0b',
