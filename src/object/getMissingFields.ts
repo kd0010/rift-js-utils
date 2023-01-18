@@ -15,6 +15,9 @@ export function getMissingFields(
   for (const key in structure) {
     const structureValue = structure[key]
     const targetValue = target[key]
+    const isPropertyOptional = key.endsWith('_')
+    
+    if (isPropertyOptional && targetValue === undefined) continue
 
     if (isMappedObject(structureValue)) {
       if (!isMappedObject(targetValue)) {
