@@ -1,6 +1,7 @@
 // components
-export { Whitespace } from './components/Whitespace'
+export * from './components/Div/Div'
+export * from './components/Whitespace'
 
 // hooks
-export { useCounter } from './hooks/useCounter'
-export { useStateObject } from './hooks/useStateObject'
+export * from './hooks/useCounter'
+export * from './hooks/useStateObject'
