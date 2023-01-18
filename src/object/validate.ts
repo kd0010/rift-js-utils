@@ -1,5 +1,15 @@
 import { isMappedObject } from './isMappedObject'
 
+/**
+ * Validates a `target` object against a defined `structure`.
+ * 
+ * A structure can have keys and nested objects inside them,
+ * all properties will be checked against `target` object.
+ * 
+ * In `structure`, a key's value can be 'string', 'number' etc.
+ * It can be regex.
+ * It can be an array that contains specific values.
+ */
 export function validate(
   target: {[k: string]: any},
   structure: ValidateStructure,
