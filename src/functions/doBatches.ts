@@ -9,6 +9,7 @@ export async function doBatches<T>(
     betweenBatchesWaitTime=264,
     perItemWaitTime=0,
     perItemWaitTimePlusOrMinus,
+    limit,
   }: {
     /**
      * Amount of items to do at once.
@@ -41,6 +42,14 @@ export async function doBatches<T>(
      * Default is 50% of `perItemWaitTime`.
      */
     perItemWaitTimePlusOrMinus?: number
+    limit?: {
+      /**
+       * Amount of items allowed to be executed within `duration`.
+       */
+      itemAmount: number
+      /** Milliseconds. */
+      duration: number
+    }
   }={},
 ) {
   if (perItemWaitTimePlusOrMinus == null) {
@@ -65,6 +74,18 @@ export async function doBatches<T>(
   while (currentIdx < data.length) {
     let batchPromises: Promise<void>[] = []
     for (let i = 0; (i < batchSize) && (currentIdx < data.length); ++i) {
+      // Wait if limit is reached
+      let currentItemCount = currentIdx + 1
+      let previousItemCount = currentItemCount - 1
+      if (
+        limit &&
+        previousItemCount != 0 &&
+        previousItemCount % limit.itemAmount == 0
+      ) {
+        console.log('waiting on this limit...') // TEMP
+        await new Promise(r => setTimeout(r, limit.duration))
+      }
+
       let itemIdx = currentIdx++
       batchPromises.push(new Promise(async resolve => {
         if (perItemWaitTime) {
