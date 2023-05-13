@@ -6,12 +6,12 @@ export async function doBatches<T>(
   onItem: (item: T) => Promise<void>,
   {
     batchSize=4,
-    betweenBatchesWaitTime=0,
+    betweenBatchesWaitTime=264,
     perItemWaitTime=0,
     perItemWaitTimePlusOrMinus,
   }: {
     /**
-     * Amount of batches to do at once.
+     * Amount of items to do at once.
      * 
      * Default: `4`
      */
@@ -19,7 +19,7 @@ export async function doBatches<T>(
     /**
      * Milliseconds.
      * 
-     * Default: `0`
+     * Default: `264`
      */
     betweenBatchesWaitTime?: number
     /**
@@ -38,7 +38,7 @@ export async function doBatches<T>(
      * Default is 50% of `perItemWaitTime`.
      */
     perItemWaitTimePlusOrMinus?: number
-  },
+  }={},
 ) {
   if (perItemWaitTimePlusOrMinus == null) {
     perItemWaitTimePlusOrMinus = 0.5 * perItemWaitTime
@@ -49,30 +49,27 @@ export async function doBatches<T>(
     perItemWaitTime - perItemWaitTimePlusOrMinus,
   )
 
-  let perItemWaitTimeFullRange = perItemWaitTimePlusOrMinus * 2
+  let perItemWaitTimeFullRange =
+    perItemWaitTimePlusOrMinus * 2
+    // Subtract, if too much
+    + Math.min(0, perItemWaitTime - perItemWaitTimePlusOrMinus)
 
   const getPerItemWaitTime = () => {
     return perItemWaitTimeBase + Math.floor(Math.random() * perItemWaitTimeFullRange)
   }
 
-  // TEMP
-  for (let i = 0; i < 100; ++i) {
-    console.log(getPerItemWaitTime()) // TEMP
-  }
-  throw 'stop' // TEMP
-
   let currentIdx = 0
   while (currentIdx < data.length) {
     let batchPromises: Promise<void>[] = []
     for (let i = 0; (i < batchSize) && (currentIdx < data.length); ++i) {
+      let itemIdx = currentIdx++
       batchPromises.push(new Promise(async resolve => {
         if (perItemWaitTime) {
-          await new Promise(r => setTimeout(r, perItemWaitTime))
+          await new Promise(r => setTimeout(r, getPerItemWaitTime()))
         }
-        await onItem(data[currentIdx]!)
+        await onItem(data[itemIdx]!)
         resolve()
       }))
-      ++currentIdx
     }
 
     await Promise.all(batchPromises)
@@ -81,19 +78,5 @@ export async function doBatches<T>(
     if (betweenBatchesWaitTime) {
       await new Promise(r => setTimeout(r, betweenBatchesWaitTime))
     }
-  }
-
-  // TEMP stay
-  while (currentIdx < data.length) {
-    break
-    let promisesBatch: Promise<void>[] = []
-    for (let i = 0; i < batchSize && currentIdx < data.length; ++i) {
-      promisesBatch.push(onItem(data[ currentIdx ]!))
-      ++currentIdx
-    }
-    await Promise.all(promisesBatch)
-
-    // Wait some time before processing the next batch
-    await new Promise(r => setTimeout(r, betweenBatchesWaitTime))
   }
 }
