@@ -5,6 +5,7 @@ dist/
 # compiled
 /array/
 /constants/
+/functions/
 /number/
 /object/
 /preact/

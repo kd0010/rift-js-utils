@@ -1,11 +1,12 @@
 {
   "name": "rift-js-utils",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "",
   "license": "MIT",
   "files": [
     "/array",
     "/constants",
+    "/functions",
     "/number",
     "/object",
     "/preact",
