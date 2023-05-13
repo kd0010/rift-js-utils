@@ -29,7 +29,10 @@ export async function doBatches<T>(
      * This will make it wait before executing on the item
      * in its current batch.
      * It is useful if it is needed to disperse function calls
-     * rather than allowing the whole batch to be executed at once.
+     * rather than allowing them to start immediately and at once in batch.
+     * This will not slow down any batch by much
+     * as it is awaited in parallel inside batch;
+     * it simply shifts function starting points.
      * 
      * Default: `0`
      */
