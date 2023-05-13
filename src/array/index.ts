@@ -1,4 +1,4 @@
-export { moveArrItem } from './moveArrItem'
-export { push } from './push'
-export { sortAscending } from './sortAscending'
-export { sortDescending } from './sortDescending'
+export * from './moveArrItem'
+export * from './push'
+export * from './sortAscending'
+export * from './sortDescending'

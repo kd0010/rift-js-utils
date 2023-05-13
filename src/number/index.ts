@@ -1,2 +1,2 @@
-export { ensureTimestampFormat } from './ensureTimestampFormat'
-export { round } from './round'
+export * from './ensureTimestampFormat'
+export * from './round'
