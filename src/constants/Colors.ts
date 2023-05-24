@@ -1,6 +1,7 @@
 export const Colors = {
   'General': {
     whiteF2: '#f2f2f2',
+    whiteF4: '#f4f4f4',
     whiteF5: '#f5f5f5',
     black: '#242426',
     affirmativeGreen: '#68cc75',
@@ -24,12 +25,46 @@ export const Colors = {
     lime: '#b5e61d',
     legoshiGray: '#748980',
     darkLeafGreen: '#221b21',
+    yin: '#020404',
+    yang: '#fcfcfc',
+    night: '#090a0b',
   },
-  'YinYang': {
-    yinBlack: '#090a0b',
-    yinBlackSecondary: '#020404',
-    yangWhite: '#fcfcfc',
-    yangWhiteSecondary: '#f4f4f4',
+  '1': {
+    cinder: '#15141E',
+    mirage: '#171522',
+    tuna: '#383640',
+    lightBlueGray: '#BECBDE',
+    springWood: '#F1F8EF',
+  },
+  '2': {
+    darkDarkRed: '#1B101C',
+    darkBrownishRed: '#1F121D',
+    gondola: '#241621',
+    sandDune: '#7D7062',
+    satinLinen: '#EFE2CF',
+  },
+  /** ~ */
+  '3': {
+    darkDarkRed: '#1B101C',
+    darkBrownishRed: '#1F121D',
+    gondola: '#241621',
+    lightSage: '#C7EBB0',
+    mintJulep: '#F7EDBE',
+  },
+  '4': {
+    lightSage: '#C7EBB0',
+    loafer: '#F2F2D7',
+    mintJulep: '#F7EDBE',
+    darkDarkRed: '#1B101C',
+    mirage: '#171522',
+  },
+  /** Stars. */
+  '5': {
+    charcoal: '#050C16',
+    midnight: '#0F1C2A',
+    languidLavender: '#D7CAD6',
+    dawnPink: '#F4E8DE',
+    balticSea: '#232329',
   },
   'Clearly': {
     orange: '#ff3535',
@@ -51,25 +86,5 @@ export const Colors = {
     magenta: '#ad00ff',
     pink: '#fa00ff',
     hotPink: '#ff008a',
-  },
-  'Coyote': {
-    0: '#3f2a2b',
-    1: '#654848',
-    2: '#957677',
-    3: '#cabcb4',
-    4: '#ffffeb',
-  },
-  'Sunset': {
-    yellow: '#ffe484',
-    golden: '#ffcc33',
-    orange: '#fc9601',
-    maroon: '#d14009',
-  },
-  'Twitter': {
-    pink: '#f4245e',
-    purple: '#794bc4',
-    golden: '#ffad1f',
-    orange: '#f45d22',
-    green: '#17bf63',
   },
 } as const
