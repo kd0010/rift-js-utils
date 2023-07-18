@@ -3,54 +3,14 @@
  */
 export async function doBatches<T>(
   data: T[],
-  onItem: (item: T) => Promise<void>,
+  onItem: DoBatchesOnItem<T>,
   {
     batchSize=4,
     betweenBatchesWaitTime=264,
     perItemWaitTime=0,
     perItemWaitTimePlusOrMinus,
     limit,
-  }: {
-    /**
-     * Amount of items to do at once.
-     * 
-     * Default: `4`
-     */
-    batchSize?: number
-    /**
-     * Milliseconds.
-     * 
-     * Default: `264`
-     */
-    betweenBatchesWaitTime?: number
-    /**
-     * Set a base wait time for each item
-     * that then gets randomly increased or decreased slightly
-     * based on `perItemWaitTimePlusOrMinus`.
-     * This will make it wait before executing on the item
-     * in its current batch.
-     * It is useful if it is needed to disperse function calls
-     * rather than allowing them to start immediately and at once in batch.
-     * This will not slow down any batch by much
-     * as it is awaited in parallel inside batch;
-     * it simply shifts function starting points.
-     * 
-     * Default: `0`
-     */
-    perItemWaitTime?: number
-    /**
-     * Default is 50% of `perItemWaitTime`.
-     */
-    perItemWaitTimePlusOrMinus?: number
-    limit?: {
-      /**
-       * Amount of items allowed to be executed within `duration`.
-       */
-      itemAmount: number
-      /** Milliseconds. */
-      duration: number
-    }
-  }={},
+  }: DoBatchesOptions={},
 ) {
   if (perItemWaitTimePlusOrMinus == null) {
     perItemWaitTimePlusOrMinus = 0.5 * perItemWaitTime
@@ -102,5 +62,49 @@ export async function doBatches<T>(
     if (betweenBatchesWaitTime) {
       await new Promise(r => setTimeout(r, betweenBatchesWaitTime))
     }
+  }
+}
+
+export type DoBatchesOnItem<T> = (item: T) => Promise<void>
+
+export interface DoBatchesOptions {
+  /**
+   * Amount of items to do at once.
+   * 
+   * Default: `4`
+   */
+  batchSize?: number
+  /**
+   * Milliseconds.
+   * 
+   * Default: `264`
+   */
+  betweenBatchesWaitTime?: number
+  /**
+   * Set a base wait time (milliseconds) for each item
+   * that then gets randomly increased or decreased slightly
+   * based on `perItemWaitTimePlusOrMinus`.
+   * This will make it wait before executing on the item
+   * in its current batch.
+   * It is useful if it is needed to disperse function calls
+   * rather than allowing them to start immediately and at once in batch.
+   * This will not slow down any batch by much
+   * as it is awaited in parallel inside batch;
+   * it simply shifts function starting points.
+   * 
+   * Default: `0`
+   */
+  perItemWaitTime?: number
+  /**
+   * Default is 50% of `perItemWaitTime`.
+   */
+  perItemWaitTimePlusOrMinus?: number
+  limit?: {
+    /**
+     * Amount of items allowed to be executed within `duration`.
+     */
+    itemAmount: number
+    /** Milliseconds. */
+    duration: number
   }
 }
