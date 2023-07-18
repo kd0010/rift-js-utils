@@ -7,6 +7,7 @@ export async function doBatches<T>(
   {
     batchSize=4,
     betweenBatchesWaitTime=264,
+    onBetweenBatches=function(){},
     perItemWaitTime=0,
     perItemWaitTimePlusOrMinus,
     limit,
@@ -34,6 +35,9 @@ export async function doBatches<T>(
   while (currentIdx < data.length) {
     let batchPromises: Promise<void>[] = []
     for (let i = 0; (i < batchSize) && (currentIdx < data.length); ++i) {
+      // Wait if halted
+      await batchesHalt.checkAndWait()
+
       // Wait if limit is reached
       let currentItemCount = currentIdx + 1
       let previousItemCount = currentItemCount - 1
@@ -60,9 +64,13 @@ export async function doBatches<T>(
     
     // Wait before next batch
     if (betweenBatchesWaitTime) {
+      onBetweenBatches()
       await new Promise(r => setTimeout(r, betweenBatchesWaitTime))
     }
   }
+
+  // Clean up after all batches by resetting a potentially pending halt.
+  batchesHalt.resetPendingHalt()
 }
 
 export type DoBatchesOnItem<T> = (item: T) => Promise<void>
@@ -80,6 +88,7 @@ export interface DoBatchesOptions {
    * Default: `264`
    */
   betweenBatchesWaitTime?: number
+  onBetweenBatches?: () => void
   /**
    * Set a base wait time (milliseconds) for each item
    * that then gets randomly increased or decreased slightly
@@ -107,4 +116,46 @@ export interface DoBatchesOptions {
     /** Milliseconds. */
     duration: number
   }
+}
+
+/**
+ * Halts batches for a provided milliseconds duration.
+ */
+export const haltBatches: typeof batchesHalt.halt = function(
+  durationMs,
+  haltAfter,
+) {
+  batchesHalt.halt(durationMs, haltAfter)
+}
+
+const batchesHalt = {
+  state: {
+    halted: false,
+    /** Milliseconds. */
+    haltDuration: 0,
+    /** Item count. */
+    haltAfter: 0,
+  },
+  halt(
+    durationMs: number,
+    /** Item amount to halt after. */
+    haltAfter: number=0,
+  ) {
+    this.state.halted = true
+    this.state.haltDuration = durationMs
+    this.state.haltAfter = haltAfter
+  },
+  async checkAndWait() {
+    if (!this.state.halted) return
+    if (this.state.haltAfter--) return
+    
+    await new Promise(_ => setTimeout(_, this.state.haltDuration))
+
+    this.resetPendingHalt()
+  },
+  resetPendingHalt() {
+    this.state.halted = false
+    this.state.haltDuration = 0
+    this.state.haltAfter = 0
+  },
 }
