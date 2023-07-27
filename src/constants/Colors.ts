@@ -67,8 +67,8 @@ export const Colors = {
     balticSea: '#232329',
   },
   'Clearly': {
-    orange: '#ff3535',
-    red: '#ffa800',
+    orange: '#ffa800',
+    red: '#ff3535',
     yellow: '#fff500',
     lime: '#ccff02',
     lightGreen: '#adff00',
