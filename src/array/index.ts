@@ -1,3 +1,4 @@
+export * from './isArray'
 export * from './moveArrItem'
 export * from './push'
 export * from './sortAscending'
