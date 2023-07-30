@@ -1,4 +1,4 @@
-import { dayMilliseconds } from './dayMilliseconds'
+import { dayMilliseconds } from './constants'
 import { ensureTimestampFormat } from './ensureTimestampFormat'
 
 /**
