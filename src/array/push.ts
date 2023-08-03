@@ -1,8 +1,7 @@
 /**
  * Solves an eternal problem of needing to check whether
  * an array exists in the object property's value
- * before pushing an item in the array,
- * by abstracting this logic behind a function call.
+ * before pushing an item in the array.
  */
 export function push<T extends {[k: string]: any}>(
   obj: T,
