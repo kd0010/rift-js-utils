@@ -53,7 +53,7 @@ export const Div = forwardRef<HTMLDivElement, Props>(
 
     const className = useMemo(() => {
       return joinWithSpaces(
-        props.className,
+        typeof props.className == 'string' && props.className,
         props.hidden && 'Div-hidden',
         props.hidesOverflownText && 'Div-hide-overflown-text-nowrap',
         props.hidesOverflownTextAllowingWrap && 'Div-hide-overflown-text-wrap',
@@ -120,9 +120,9 @@ export const Div = forwardRef<HTMLDivElement, Props>(
     ])
 
     const style = useMemo(() => {
-      const style: CSSProperties = {
-        width: props.width,
-        height: props.height,
+      const style: typeof props.style = {
+        width: (typeof props.width == 'string' || typeof props.width == 'number') ? props.width : undefined,
+        height: (typeof props.height == 'string' || typeof props.height == 'number') ? props.height : undefined,
         padding: props.padding,
         margin: props.margin,
         backgroundColor: props.bg,
