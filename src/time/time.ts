@@ -1,7 +1,8 @@
 import { isMonthNum, MonthName, MonthNames } from './MonthNames'
 import { MonthShortName, MonthShortNames } from './MonthShortNames'
-import { ensureTimestampFormat, hourMilliseconds } from 'rift-js-utils/number'
 import { isWeekdayNum, WeekdayName, WeekdayNames } from './WeekdayNames'
+import { hourMilliseconds } from './constants'
+import { ensureTimestampFormat } from './ensureTimestampFormat'
 
 export class TimeClass {
   #config: TimeConfig | null

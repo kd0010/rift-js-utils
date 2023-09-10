@@ -3,6 +3,7 @@ export const Colors = {
     whiteF2: '#f2f2f2',
     whiteF4: '#f4f4f4',
     whiteF5: '#f5f5f5',
+    whiteFC: '#fcfcfc',
     black: '#242426',
     affirmativeGreen: '#68cc75',
     affirmativeDarkGreen: '#32a852',

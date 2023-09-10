@@ -1,11 +1,18 @@
 import { describe, it, expect } from 'vitest'
 import { formatDuration, FormatDurationOptions } from './formatDuration'
+import {
+  dayMilliseconds,
+  hourMilliseconds,
+  minuteMilliseconds,
+  secondMilliseconds,
+  weekMilliseconds,
+} from './constants'
 
-const weeks = 604_800_000
-const days = 86_400_000
-const hours = 3_600_000
-const minutes = 60_000
-const seconds = 1000
+const weeks = weekMilliseconds
+const days = dayMilliseconds
+const hours = hourMilliseconds
+const minutes = minuteMilliseconds
+const seconds = secondMilliseconds
 
 describe('formatDuration', () => {
   it('Returns correctly intuitively-formatted time passed', () => {
