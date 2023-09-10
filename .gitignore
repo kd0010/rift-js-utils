@@ -5,6 +5,7 @@ dist/
 # compiled
 /array/
 /constants/
+/fetch/
 /functions/
 /number/
 /object/
