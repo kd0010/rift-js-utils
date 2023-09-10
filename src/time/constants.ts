@@ -1,0 +1,9 @@
+export const weekMilliseconds = 604_800_000 as const
+export const weekSeconds = 604_800 as const
+export const dayMilliseconds = 86_400_000 as const
+export const daySeconds = 86_400 as const
+export const hourMilliseconds = 3_600_000 as const
+export const hourSeconds = 3_600 as const
+export const minuteMilliseconds = 60_000 as const
+export const minuteSeconds = 60 as const
+export const secondMilliseconds = 1_000 as const

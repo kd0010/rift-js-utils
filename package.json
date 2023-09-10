@@ -11,7 +11,8 @@
     "/number",
     "/object",
     "/preact",
-    "/string"
+    "/string",
+    "/time"
   ],
   "scripts": {},
   "repository": {
