@@ -1,7 +1,7 @@
-import './Div.css'
 import { forwardRef, ComponentProps, CSSProperties } from 'preact/compat'
-import { useMemo } from 'preact/hooks'
+import { useEffect, useMemo } from 'preact/hooks'
 import { joinWithSpaces } from '../../../string/joinWithSpaces'
+import { appendDivCss } from './appendDivCss'
 
 interface Props extends ComponentProps<'div'> {
   padding?: CSSProperties['padding']
@@ -49,6 +49,8 @@ interface Props extends ComponentProps<'div'> {
 
 export const Div = forwardRef<HTMLDivElement, Props>(
   (props, ref) => {
+    useEffect(() => appendDivCss('Div-css'), [])
+
     const className = useMemo(() => {
       return joinWithSpaces(
         props.className,

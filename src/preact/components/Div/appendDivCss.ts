@@ -1,0 +1,150 @@
+export function appendDivCss(
+  styleElementId: string,
+) {
+  if (document.head.querySelector(`style#${styleElementId}`) != null) return
+
+  const styleElem = document.createElement('style')
+  styleElem.id = styleElementId
+  
+  styleElem.innerHTML = `
+/*
+Flex classes
+*/
+
+.Div-flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.Div-flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.Div-center-x-y {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Div-center-x {
+  display: flex;
+  justify-content: center;
+}
+.Div-center-y {
+  display: flex;
+  align-items: center;
+}
+.Div-flex-start-x {
+  display: flex;
+  justify-content: flex-start;
+}
+.Div-flex-end-x {
+  display: flex;
+  justify-content: flex-end;
+}
+.Div-flex-start-y {
+  display: flex;
+  align-items: flex-start;
+}
+.Div-flex-end-y {
+  display: flex;
+  align-items: flex-end;
+}
+.Div-content-center-x-y {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+.Div-content-center-x {
+  display: flex;
+  justify-content: center;
+}
+.Div-content-center-y {
+  display: flex;
+  align-content: center;
+}
+.Div-content-flex-start-x {
+  display: flex;
+  justify-content: flex-start;
+}
+.Div-content-flex-end-x {
+  display: flex;
+  justify-content: flex-end;
+}
+.Div-content-flex-start-y {
+  display: flex;
+  align-content: flex-start;
+}
+.Div-content-flex-end-y {
+  display: flex;
+  align-content: flex-end;
+}
+.Div-flex-baseline {
+  display: flex;
+  align-items: baseline;
+}
+.Div-flex-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+.Div-flex-space-around {
+  display: flex;
+  justify-content: space-around;
+}
+.Div-flex-space-evenly {
+  display: flex;
+  justify-content: space-evenly;
+}
+.Div-flex-allow-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/*
+Flex child classes
+*/
+
+.Div-flex-grow-1 {
+  flex-grow: 1;
+}
+.Div-flex-shrink-0 {
+  flex-shrink: 0;
+}
+.Div-self-center {
+  display: flex;
+  align-self: center;
+}
+.Div-self-flex-start {
+  display: flex;
+  align-self: flex-start;
+}
+.Div-self-flex-end {
+  display: flex;
+  align-self: flex-end;
+}
+.Div-self-baseline {
+  display: flex;
+  align-self: baseline;
+}
+
+/*
+Other classes
+*/
+
+.Div-hidden {
+  opacity: 0;
+  position: absolute;
+  /* Do not interfere with interactability */
+  pointer-events: none;
+  transform: scale(0);
+}
+.Div-hide-overflown-text-nowrap {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.Div-hide-overflown-text-wrap {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}`
+
+  document.head.appendChild(styleElem)
+}

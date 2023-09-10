@@ -46,7 +46,7 @@ export async function doBatches<T>(
         previousItemCount != 0 &&
         previousItemCount % limit.itemAmount == 0
       ) {
-        // console.log('waiting on this limit...') // TEMP
+        // console.log('waiting on this limit...') // TEMPDEV
         await new Promise(r => setTimeout(r, limit.duration))
       }
 
