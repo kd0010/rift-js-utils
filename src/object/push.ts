@@ -6,7 +6,7 @@
 export function push<T extends {[k: string]: any}>(
   obj: T,
   property: keyof T,
-  value: T[keyof T][keyof T[keyof T]],
+  value: T[keyof T][number],
 ): void {
   if (!Array.isArray(obj[property])) obj[property] = [] as any
   obj[property].push(value)
