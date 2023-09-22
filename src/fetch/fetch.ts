@@ -11,7 +11,7 @@ export async function fetch<T>(
     query,
     useNodeFetch=false,
   }: FetchOptions,
-): Promise<Response<T>> {
+): Promise<FetchResponse<T>> {
   let _fetch = useNodeFetch ? nodeFetch : globalThis.fetch
   let _headers: [string, string][] | undefined = headers ? Object.entries(headers) : undefined
   let _body: string | undefined = body ? JSON.stringify(body) : undefined
@@ -75,7 +75,7 @@ export interface FetchOptions {
   useNodeFetch?: boolean
 }
 
-export type Response<T> = {
+export type FetchResponse<T> = {
   ok: true
   data: T
   status: number
@@ -85,4 +85,9 @@ export type Response<T> = {
   data: unknown
   status: number
   headers: globalThis.Headers | Headers
+}
+
+export interface Response<T> {
+  data: FetchResponse<T>['data']
+  ok: FetchResponse<T>['ok']
 }
