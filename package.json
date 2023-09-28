@@ -1,6 +1,6 @@
 {
   "name": "rift-js-utils",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "",
   "license": "MIT",
   "files": [
@@ -20,12 +20,12 @@
     "url": "git+https://github.com/kd0010/rift-js-utils.git"
   },
   "dependencies": {
-    "@types/node-fetch": "^2.6.5",
+    "@types/node-fetch": "^2.6.6",
     "node-fetch": "^2.6.7",
-    "preact": "^10.17.1"
+    "preact": "^10.18.0"
   },
   "devDependencies": {
     "typescript": "^5.2.2",
-    "vitest": "^0.34.4"
+    "vitest": "^0.34.5"
   }
 }

@@ -1,3 +1,5 @@
+export * from './isPositiveNumber'
+export * from './isPositiveNumberOrZero'
 export * from './isValidNumber'
 export * from './max'
 export * from './mean'
