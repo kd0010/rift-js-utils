@@ -32,9 +32,7 @@ export async function fetch<T>(
     )
 
     let data: any
-    try {
-      data = await res.json()
-    } catch(e) {}
+    try {data = await res.json()} catch(e) {}
 
     let status = res.status
     let headers = res.headers
@@ -60,7 +58,7 @@ export async function fetch<T>(
   } catch(e) {
     return {
       ok: false,
-      data: undefined,
+      data: null,
       status: 400,
       headers: new globalThis.Headers(),
     }
@@ -76,19 +74,32 @@ export interface FetchOptions {
   useNodeFetch?: boolean
 }
 
-export type FetchResponse<T> = {
+interface FetchResponseSuccess<D> {
   ok: true
-  data: T
+  data: D
   status: number
   headers: globalThis.Headers | Headers
-} | {
+}
+
+interface FetchResponseFail<D> {
   ok: false
   data: unknown
   status: number
   headers: globalThis.Headers | Headers
 }
 
-export interface Response<T> {
-  data: T
-  ok: boolean
+export type FetchResponse<D> =
+  | FetchResponseSuccess<D>
+  | FetchResponseFail<D>
+
+/**
+ * Developer friendly interface
+ * for building classes that utilize `fetch`.
+ */
+export type Response<D> = {
+  ok: FetchResponseSuccess<D>['ok']
+  data: FetchResponseSuccess<D>['data']
+} | {
+  ok: FetchResponseFail<D>['ok']
+  data: FetchResponseFail<D>['data']
 }
