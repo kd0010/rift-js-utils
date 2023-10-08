@@ -89,6 +89,6 @@ export type FetchResponse<T> = {
 }
 
 export interface Response<T> {
-  data: FetchResponse<T>['data']
-  ok: FetchResponse<T>['ok']
+  data: T
+  ok: boolean
 }
