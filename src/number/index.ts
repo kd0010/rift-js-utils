@@ -1,3 +1,4 @@
+export * from './ensureNumber'
 export * from './isPositiveNumber'
 export * from './isPositiveNumberOrZero'
 export * from './isValidNumber'
