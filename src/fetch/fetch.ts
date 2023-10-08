@@ -1,4 +1,4 @@
-import { default as nodeFetch, Headers } from 'node-fetch'
+import { Headers } from 'node-fetch'
 import { isStatus } from './isStatus'
 import { Method } from './Methods'
 
@@ -12,8 +12,8 @@ export async function fetch<T>(
     useNodeFetch=false,
   }: FetchOptions,
 ): Promise<FetchResponse<T>> {
-  let _fetch = useNodeFetch ? nodeFetch : globalThis.fetch
-  let _headers: [string, string][] | undefined = headers ? Object.entries(headers) : undefined
+  let _fetch = useNodeFetch ? (await import('node-fetch')).default : globalThis.fetch
+  let _headers: [string, string][] | undefined = headers != null ? Object.entries(headers) : undefined
   let _body: string | undefined = body ? JSON.stringify(body) : undefined
 
   if (query) {
@@ -62,7 +62,7 @@ export async function fetch<T>(
       ok: false,
       data: undefined,
       status: 400,
-      headers: new Headers(),
+      headers: new globalThis.Headers(),
     }
   }
 }
@@ -71,7 +71,8 @@ export interface FetchOptions {
   method?: Method
   query?: {[k: string]: string}
   body?: {[k: string]: string}
-  headers: {[k: string]: string}
+  headers?: {[k: string]: string}
+  /** @default false */
   useNodeFetch?: boolean
 }
 
