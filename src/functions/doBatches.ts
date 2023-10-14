@@ -1,3 +1,5 @@
+import { sleep } from './sleep'
+
 /**
  * Execute multiple asynchronous functions at once, in batches.
  */
@@ -47,13 +49,13 @@ export async function doBatches<T>(
         previousItemCount % limit.itemAmount == 0
       ) {
         // console.log('waiting on this limit...') // TEMPDEV
-        await new Promise(r => setTimeout(r, limit.duration))
+        await sleep(limit.duration)
       }
 
       let itemIdx = currentIdx++
       batchPromises.push(new Promise(async resolve => {
         if (perItemWaitTime) {
-          await new Promise(r => setTimeout(r, getPerItemWaitTime()))
+          await sleep(getPerItemWaitTime())
         }
         await onItem(data[itemIdx]!)
         resolve()
@@ -65,7 +67,7 @@ export async function doBatches<T>(
     // Wait before next batch
     if (betweenBatchesWaitTime) {
       onBetweenBatches()
-      await new Promise(r => setTimeout(r, betweenBatchesWaitTime))
+      await sleep(betweenBatchesWaitTime)
     }
   }
 
@@ -149,7 +151,7 @@ const batchesHalt = {
     if (!this.state.halted) return
     if (this.state.haltAfter--) return
     
-    await new Promise(_ => setTimeout(_, this.state.haltDuration))
+    await sleep(this.state.haltDuration)
 
     this.resetPendingHalt()
   },
