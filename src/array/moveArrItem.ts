@@ -23,7 +23,7 @@ export function moveArrItem(
   if (indexA == indexB) return arr
 
   let transformedArr = [...arr]
-  const itemToMove = arr[ indexA ]
+  const itemToMove = arr[indexA]
   // Remove the field that is about to be moved
   transformedArr.splice(indexA, 1)
 

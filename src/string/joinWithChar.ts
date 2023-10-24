@@ -11,7 +11,7 @@ export function joinWithChar(
   let productSt = ''
 
   for (let i = 0; i < args.length; ++i) {
-    let st = args[ i ]
+    let st = args[i]
     if (st === false || st == null || st === '') continue
     if (i != 0) productSt += char
     productSt += st

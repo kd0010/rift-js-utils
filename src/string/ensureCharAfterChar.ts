@@ -16,7 +16,7 @@ export function ensureCharAfterChar(
       skipFirst = false
       continue
     }
-    if (st[ 0 ] != desiredChar) newStringParts.push(desiredChar + st)
+    if (st[0] != desiredChar) newStringParts.push(desiredChar + st)
     else newStringParts.push(st)
   }
   return newStringParts.join(targetChar)

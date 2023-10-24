@@ -18,8 +18,8 @@ export function getUniqueId(): string {
 
   // Randomize upper-case / lower-case
   for (let i = 0; i < 18; ++i) {
-    let char = st[ i ]!
-    if (decider[ i ]! >= '5') st2 += char.toUpperCase()
+    let char = st[i]!
+    if (decider[i]! >= '5') st2 += char.toUpperCase()
     else st2 += char
   }
 
