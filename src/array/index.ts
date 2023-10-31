@@ -1,4 +1,5 @@
 export * from './arrToObj'
+export * from './ensureArray'
 export * from './isArray'
 export * from './isLastIndex'
 export * from './isNotLastIndex'

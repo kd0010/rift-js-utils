@@ -1,4 +1,4 @@
-export * from './ensureJson'
+export * from './ensureObj'
 export * from './flipObj'
 export * from './getMissingFields'
 export * from './getStore'
