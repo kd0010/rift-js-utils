@@ -4,7 +4,7 @@ import { isMappedObject } from './isMappedObject'
 /**
  * Ensures provided string contains a mapped object or an array.
  */
-export default function ensureJson(
+export function ensureJson(
   string: string,
 ): {[k: string]: any} | any[] | null {
   try {
