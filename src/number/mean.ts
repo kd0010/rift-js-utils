@@ -6,5 +6,5 @@ export function mean(
   for (let i = 0; i < len; ++i) {
     sum += numbers[i]!
   }
-  return sum / len
+  return sum / (len || 1)
 }
