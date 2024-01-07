@@ -4,7 +4,7 @@
  * millisecond timestamp that has been converted to a string of
  * radix 36.
  */
-export function getUniqueId(): string {
+export function makeUniqueId(): string {
   const random = () => Math.random().toString(36).substring(2, 11)
 
   let st = random() + random()
@@ -23,6 +23,10 @@ export function getUniqueId(): string {
     else st2 += char
   }
 
-  let id = st2 + '-' + Date.now().toString(36)
+  let id = st2 + '-' + makeMillisecondId()
   return id
+}
+
+export function makeMillisecondId(): string {
+  return Date.now().toString(36)
 }
