@@ -9,13 +9,14 @@ export function getDayTimestampBoundaries(
   /** UTC`+x` or UTC`-x`; `x` being `timezoneOffsetHours`. @default new Date(timestamp).getTimezoneOffset() / 60  */
   timezoneOffsetHours?: number,
 ): [number, number] {
-  const ts = ensureTimestampFormat('millisecond', timestamp)
+  timestamp = ensureTimestampFormat('millisecond', timestamp)
   if (Date != null) timezoneOffsetHours ??= -1 * new Date(timestamp).getTimezoneOffset() / 60
   else timezoneOffsetHours = 0
-  const tzOffsetTs = ts + timezoneOffsetHours * hourMilliseconds // convert to ms
 
+  let tzOffsetTs = timestamp + timezoneOffsetHours * hourMilliseconds // convert to ms
   let currentDayMs = tzOffsetTs % dayMilliseconds
-  const dayBeginTs = ts - currentDayMs
+  
+  const dayBeginTs = timestamp - currentDayMs
   const dayEndTs = dayBeginTs + dayMilliseconds
 
   return [dayBeginTs, dayEndTs]
