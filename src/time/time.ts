@@ -1,7 +1,7 @@
 import { isMonthNum, MonthName, MonthNames } from './MonthNames'
 import { MonthShortName, MonthShortNames } from './MonthShortNames'
 import { isWeekdayNum, WeekdayName, WeekdayNames } from './WeekdayNames'
-import { hourMilliseconds } from './constants'
+import { hourMilliseconds, minuteMilliseconds } from './constants'
 import { ensureTimestampFormat } from './ensureTimestampFormat'
 
 export class TimeClass {
@@ -14,23 +14,25 @@ export class TimeClass {
   defaultValue = '–'
 
   constructor(
-    value: string | number | Date,
+    value: number,
     config?: TimeConfig,
   ) {
-    if (typeof value == 'number') value = ensureTimestampFormat('millisecond', value)
-    const date = new Date(value)
-    this.date = date
+    this.#config = config ?? null
+    this.#timezoneOffsetHours = config?.timezoneOffsetHours ?? -1 * new Date(value).getTimezoneOffset() / 60
+    this.#timezoneOffsetMs = this.#timezoneOffsetHours * hourMilliseconds
 
-    if (date.toString() == 'Invalid Date') {
+    value = ensureTimestampFormat('millisecond', value)
+    
+    let localTzOffset = (new Date(value).getTimezoneOffset() * minuteMilliseconds)
+    const tzOffsetValue = value + localTzOffset + this.#timezoneOffsetMs
+    this.date = new Date(tzOffsetValue)
+
+    if (this.date.toString() == 'Invalid Date') {
       this.#isValid = false
     } else {
-      this.#ms = date.getTime()
+      this.#ms = this.date.getTime()
       this.#isValid = true
     }
-
-    this.#config = config ?? null
-    this.#timezoneOffsetHours = config?.timezoneOffsetHours ?? 0
-    this.#timezoneOffsetMs = this.#timezoneOffsetHours * hourMilliseconds
   }
 
   getDate(): string {
@@ -211,13 +213,14 @@ export class TimeClass {
 }
 
 export function time(
-  value: string | number | Date,
+  value: number,
   config?: TimeConfig,
 ): TimeClass {
   return new TimeClass(value, config)
 }
 
 export interface TimeConfig {
+  /** @default new Date(value).getTimezoneOffset() / 60 * -1 */
   timezoneOffsetHours?: number
   useShortMonthNames?: boolean
   useDoubleDigitsAlways?: boolean
