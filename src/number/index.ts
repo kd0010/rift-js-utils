@@ -1,3 +1,4 @@
+export * from './constrainNumber'
 export * from './ensureNumber'
 export * from './isPositiveNumber'
 export * from './isPositiveNumberOrZero'
