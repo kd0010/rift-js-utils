@@ -3,7 +3,7 @@ import { isArray } from './isArray'
 /**
  * Ensures provided string contains an array.
  */
-export function ensureObj<T=any>(
+export function ensureArray<T=any>(
   string: string,
 ): T[] | null {
   try {
