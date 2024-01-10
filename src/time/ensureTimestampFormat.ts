@@ -19,7 +19,7 @@ export function ensureTimestampFormat(
   // convert it to the other.
   if (timestampType != format) {
     if (format == 'millisecond') return timestamp * 1000
-    else return timestamp / 1000
+    else return Math.floor(timestamp / 1000)
   } else {
     return timestamp
   }
