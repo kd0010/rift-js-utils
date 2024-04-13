@@ -13,6 +13,10 @@ export const Colors = {
     awwchangTeal: '#cfe5de',
     blueyGrey: '#8890b5',
     greenyBlue: '#3cbdc2',
+    skyBlue: '#b7d9e6',
+    elegantBlue: '#233d63',
+    /** direct inversion of `beige` */
+    deepBlue: '#1B2736',
     sandstone: '#ccad70',
     platinumTier: '#2a947b',
     goldTier: '#f9b439',
@@ -20,8 +24,6 @@ export const Colors = {
     midnight: '#1a133d',
     pumpkinOrange: '#fc7c00',
     deepSea: '#004740',
-    skyBlue: '#b7d9e6',
-    elegantBlue: '#233d63',
     green: '#22b14c',
     lime: '#b5e61d',
     legoshiGray: '#748980',
@@ -29,6 +31,7 @@ export const Colors = {
     yin: '#020404',
     yang: '#fcfcfc',
     night: '#090a0b',
+    beige: '#E4D8C9',
   },
   '1': {
     cinder: '#15141E',
