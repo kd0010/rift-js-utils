@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@types/node-fetch": "^2.6.10",
-    "node-fetch": "^2.6.7",
+    "node-fetch": "2.6.7",
     "preact": "^10.19.3"
   },
   "devDependencies": {
