@@ -1,5 +1,5 @@
-import { MonthNames, isMonthNum } from './MonthNames'
-import { MonthShortNames } from './MonthShortNames'
+import {MonthNames, isMonthNum} from './MonthNames'
+import {MonthShortNames} from './MonthShortNames'
 
 /**
  * Returns extensive information about the day

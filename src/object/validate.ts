@@ -1,4 +1,4 @@
-import { isMappedObject } from './isMappedObject'
+import {isMappedObject} from './isMappedObject'
 
 /**
  * Validates a `target` object against a defined `structure`.

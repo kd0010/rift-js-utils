@@ -1,4 +1,4 @@
-import { isMappedObject } from './isMappedObject'
+import {isMappedObject} from './isMappedObject'
 
 const globalStores: {[k: string]: any} = {}
 
@@ -12,7 +12,7 @@ export function getStore(
       _listeners: {},
     }
   }
-  
+
   const store = globalStores[storeName]
 
   // Initialize listeners

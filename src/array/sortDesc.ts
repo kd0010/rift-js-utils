@@ -2,7 +2,7 @@
  * Sorts an `Array` of mapped `Object`s
  * based on a property that every object has.
  */
-export function sortDescending<T>(
+export function sortDesc<T>(
   arr: T[],
   propertyName: keyof T,
 ): void {

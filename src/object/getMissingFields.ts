@@ -1,4 +1,4 @@
-import { isMappedObject } from './isMappedObject'
+import {isMappedObject} from './isMappedObject'
 
 /**
  * Returns an object containing the missing fields from `target`
@@ -16,7 +16,7 @@ export function getMissingFields(
     const structureValue = structure[key]
     const targetValue = target[key]
     const isPropertyOptional = key.endsWith('_')
-    
+
     if (isPropertyOptional && targetValue === undefined) continue
 
     if (isMappedObject(structureValue)) {

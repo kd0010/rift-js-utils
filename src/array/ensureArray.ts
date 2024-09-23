@@ -1,4 +1,4 @@
-import { isArray } from './isArray'
+import {isArray} from './isArray'
 
 /**
  * Ensures provided string contains an array.
@@ -10,7 +10,7 @@ export function ensureArray<T=any>(
     const data = JSON.parse(string)
     if (isArray(data)) return data
     return null
-  } catch(e) {
+  } catch (err) {
     return null
   }
 }

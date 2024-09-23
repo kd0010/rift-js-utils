@@ -1,4 +1,4 @@
-import { sleep } from './sleep'
+import {sleep} from './sleep'
 
 /**
  * Execute multiple asynchronous functions at once, in batches.

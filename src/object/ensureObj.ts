@@ -1,4 +1,4 @@
-import { isMappedObject } from './isMappedObject'
+import {isMappedObject} from './isMappedObject'
 
 /**
  * Ensures provided string contains a mapped object or an array.
@@ -10,7 +10,7 @@ export function ensureObj(
     const data = JSON.parse(string)
     if (isMappedObject(data)) return data
     return null
-  } catch(e) {
+  } catch (err) {
     return null
   }
 }

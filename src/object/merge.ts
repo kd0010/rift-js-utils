@@ -1,4 +1,4 @@
-import { isMappedObject } from './isMappedObject'
+import {isMappedObject} from './isMappedObject'
 
 /**
  * Merge two mapped objects with potential nested values and objects

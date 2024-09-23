@@ -1,8 +1,8 @@
-import { isMonthNum, MonthName, MonthNames } from './MonthNames'
-import { MonthShortName, MonthShortNames } from './MonthShortNames'
-import { isWeekdayNum, WeekdayName, WeekdayNames } from './WeekdayNames'
-import { hourMilliseconds, minuteMilliseconds } from './constants'
-import { ensureTimestampFormat } from './ensureTimestampFormat'
+import {isMonthNum, MonthName, MonthNames} from './MonthNames'
+import {MonthShortName, MonthShortNames} from './MonthShortNames'
+import {isWeekdayNum, WeekdayName, WeekdayNames} from './WeekdayNames'
+import {hourMilliseconds, minuteMilliseconds} from './constants'
+import {ensureTimestampFormat} from './ensureTimestampFormat'
 
 export class TimeClass {
   #config: TimeConfig | null
@@ -22,7 +22,7 @@ export class TimeClass {
     this.#timezoneOffsetMs = this.#timezoneOffsetHours * hourMilliseconds
 
     value = ensureTimestampFormat('millisecond', value)
-    
+
     let localTzOffset = (new Date(value).getTimezoneOffset() * minuteMilliseconds)
     const tzOffsetValue = value + localTzOffset + this.#timezoneOffsetMs
     this.date = new Date(tzOffsetValue)
@@ -43,9 +43,9 @@ export class TimeClass {
 
     const day = this.#getDayRepr()
     const year = this.#getYearRepr()
-  
+
     const date = `${month} ${day}, ${year}`
-  
+
     return date
   }
 
@@ -57,7 +57,7 @@ export class TimeClass {
     const ampm = this.#getAMPM() ?? ''
 
     const time = `${hours}:${minutes}${ampm}`
-  
+
     return time
   }
 
@@ -66,7 +66,7 @@ export class TimeClass {
 
     const dateSt = this.getDate()
     const timeSt = this.getTime()
-  
+
     const dateTime = `${dateSt} ${timeSt}`
 
     return dateTime
@@ -94,7 +94,7 @@ export class TimeClass {
 
     const msDiff = Date.now() - this.#ms
     const msDiffDate = new Date(msDiff)
-  
+
     // If ts in the past
     if (msDiff > 0) {
       // If within last minute return seconds
@@ -103,41 +103,41 @@ export class TimeClass {
         if (s == 1) return `a second ago`
         return `${s} seconds ago`
       }
-  
+
       // If within last hour return minutes
       if (msDiff < 3_600_000) {
         const m = msDiffDate.getMinutes()
         if (m == 1) return `a minute ago`
         return `${m} minutes ago`
       }
-  
+
       // If within last 24h return hours
       if (msDiff < 86_400_000) {
         const h = msDiffDate.getHours()
         if (h == 1) return `an hour ago`
         return `${h} hours ago`
       }
-  
+
       // If within last month return days
       if (msDiff < 2_678_400_000) {
         const d = msDiffDate.getDate()
         if (d == 1) return `a day ago`
         return `${d} days ago`
       }
-  
+
       // If within last year return months
       if (msDiff < 31_622_400_000) {
         const m = msDiffDate.getMonth()
         if (m == 1) return `a month ago`
         return `${m} months ago`
       }
-  
+
       // Otherwise return years
       const y = Math.floor(msDiff / 31_622_400_000)
       if (y == 1) return `a year ago`
       return `${y} years ago`
     }
-  
+
     // No future dates as of right now
     return '—'
   }
@@ -159,7 +159,7 @@ export class TimeClass {
     const monthName = this.#config?.useShortMonthNames
       ? MonthShortNames[monthNum]
       : MonthNames[monthNum]
-    
+
     return monthName
   }
 

@@ -1,6 +1,6 @@
 // @ts-ignore tests disabled
-import { describe, it, expect } from 'vitest'
-import { formatDuration, FormatDurationOptions } from './formatDuration'
+import {describe, it, expect} from 'vitest'
+import {formatDuration, FormatDurationOptions} from './formatDuration'
 import {
   dayMilliseconds,
   hourMilliseconds,
@@ -49,10 +49,10 @@ describe('formatDuration', () => {
   })
 
   it('Correctly utilizes option `highestMeasurement`', () => {
-    const daysOption: FormatDurationOptions = { highestMeasurement: 'days' }
-    const hoursOption: FormatDurationOptions = { highestMeasurement: 'hours' }
-    const minutesOption: FormatDurationOptions = { highestMeasurement: 'minutes' }
-    const secondsOption: FormatDurationOptions = { highestMeasurement: 'seconds' }
+    const daysOption: FormatDurationOptions = {highestMeasurement: 'days'}
+    const hoursOption: FormatDurationOptions = {highestMeasurement: 'hours'}
+    const minutesOption: FormatDurationOptions = {highestMeasurement: 'minutes'}
+    const secondsOption: FormatDurationOptions = {highestMeasurement: 'seconds'}
 
     // 6d 4h 44m 56s
     const durationMs = 518_400_000 + 14_400_000 + 2_640_000 + 56_000
@@ -70,7 +70,7 @@ describe('formatDuration', () => {
     const durationMs = 4 * hours + 4 * minutes + 4 * seconds
     const durationMsWithDays = 2 * days + durationMs
 
-    const options: FormatDurationOptions = { useDoubleDigitsHMS: true }
+    const options: FormatDurationOptions = {useDoubleDigitsHMS: true}
 
     expect(formatDuration(durationMs, options)).toBe(outcome)
     expect(formatDuration(durationMsWithDays, options)).toBe(outcomeWithDays)

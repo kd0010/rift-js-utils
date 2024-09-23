@@ -1,4 +1,4 @@
-import { joinWithChar } from './joinWithChar'
+import {joinWithChar} from './joinWithChar'
 
 /**
  * Concatenates all strings provided into one string,

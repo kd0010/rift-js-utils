@@ -1,6 +1,6 @@
-import { Headers } from 'node-fetch'
-import { isStatus } from './isStatus'
-import { Method } from './Methods'
+import {Headers} from 'node-fetch'
+import {isStatus} from './isStatus'
+import {Method} from './Methods'
 
 export async function fetch<T>(
   url: string,
@@ -32,11 +32,11 @@ export async function fetch<T>(
     )
 
     let data: any
-    try {data = await res.json()} catch(e) {}
+    try {data = await res.json()} catch (err) {}
 
     let status = res.status
     let headers = res.headers
-    
+
     if (
       isStatus('4xx', status) ||
       isStatus('5xx', status)
@@ -55,7 +55,7 @@ export async function fetch<T>(
         headers,
       }
     }
-  } catch(e) {
+  } catch (err) {
     return {
       ok: false,
       data: null,

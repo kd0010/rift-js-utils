@@ -12,7 +12,7 @@ export function transposeArrays<T extends {[k: string]: any[]}>(
   const longestArrLength = Object.values(obj).reduce((length, arr) => {
     return arr.length > length ? arr.length : length
   }, 0)
-  
+
   for (let i = 0; i < longestArrLength; ++i) {
     let key: keyof typeof obj
     for (key in obj) {

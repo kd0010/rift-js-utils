@@ -1,5 +1,5 @@
-import { dayMilliseconds, hourMilliseconds } from './constants'
-import { ensureTimestampFormat } from './ensureTimestampFormat'
+import {dayMilliseconds, hourMilliseconds} from './constants'
+import {ensureTimestampFormat} from './ensureTimestampFormat'
 
 /**
  * Returns millisecond-timestamps.
@@ -15,7 +15,7 @@ export function getDayTimestampBoundaries(
 
   let tzOffsetTs = timestamp + timezoneOffsetHours * hourMilliseconds // convert to ms
   let currentDayMs = tzOffsetTs % dayMilliseconds
-  
+
   const dayBeginTs = timestamp - currentDayMs
   const dayEndTs = dayBeginTs + dayMilliseconds
 

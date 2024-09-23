@@ -1,3 +1,6 @@
+/**
+ * Gets indices of where the string matches in `text`.
+ */
 export function getIndicesOf(
   text: string,
   search: string | RegExp,
