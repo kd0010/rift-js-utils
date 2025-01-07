@@ -1,13 +1,13 @@
 /**
  * Ensures that there will be a desired character
- * after every target character in a string.
+ * after every `targetChar` in `string`.
  */
 export function ensureCharAfterChar(
-  st: string,
+  string: string,
   targetChar: string,
   desiredChar: string,
 ) {
-  let stringParts = st.split(targetChar)
+  let stringParts = string.split(targetChar)
   let newStringParts: string[] = []
   let skipFirst = true
   for (let st of stringParts) {

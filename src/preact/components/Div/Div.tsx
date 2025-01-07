@@ -1,7 +1,7 @@
-import { forwardRef, ComponentProps, CSSProperties } from 'preact/compat'
-import { useEffect, useMemo } from 'preact/hooks'
-import { joinWithSpaces } from '../../../string/joinWithSpaces'
-import { appendDivCss } from './appendDivCss'
+import {ComponentProps, CSSProperties, forwardRef} from 'preact/compat'
+import {useEffect, useMemo} from 'preact/hooks'
+import {joinWithSpaces} from '../../../string/joinWithSpaces'
+import {appendDivCss} from './appendDivCss'
 
 interface Props extends ComponentProps<'div'> {
   padding?: CSSProperties['padding']

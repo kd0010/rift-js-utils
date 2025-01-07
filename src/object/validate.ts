@@ -12,11 +12,11 @@ import {isMappedObject} from './isMappedObject'
  */
 export function validate(
   target: {[k: string]: any},
-  structure: ValidateStructure,
+  structure: ValidationStructure,
 ): ValidateResponse {
   function validateValue(
     value: any,
-    validator: ValidateDataType,
+    validator: ValidationDataType,
   ): boolean {
     switch (validator) {
       case 'array':
@@ -34,10 +34,10 @@ export function validate(
 
   function validateValueAgainstMany(
     value: any,
-    validators: ValidateDataType[] | any[],
+    validators: ValidationDataType[] | any[],
   ): boolean {
     for (let validator of validators) {
-      if (isValidateDataType(validator) && validateValue(value, validator)) {
+      if (isValidationDataType(validator) && validateValue(value, validator)) {
         return true
       } else if (value === validator) {
         return true
@@ -52,7 +52,7 @@ export function validate(
   let currentBase: string = ''
   function _validate(
     target: {[k: string]: any},
-    structure: ValidateStructure,
+    structure: ValidationStructure,
   ): ValidateResponse {
     for (let key in structure) {
       const validator = structure[key]
@@ -63,7 +63,7 @@ export function validate(
       if (isPropertyOptional && value === undefined) continue
 
       // Single data type
-      if (isValidateDataType(validator)) {
+      if (typeof validator == 'string' && isValidationDataType(validator)) {
         isValid = validateValue(value, validator)
       // Multiple data types and/or specific values
       } else if (Array.isArray(validator)) {
@@ -97,13 +97,13 @@ export function validate(
   return _validate(target, structure)
 }
 
-export interface ValidateStructure {
+export interface ValidationStructure {
   [k: string]: (
-    | ValidateDataType
-    | ValidateDataType[]
+    | ValidationDataType
+    | ValidationDataType[]
     | any[]
     | RegExp
-    | ValidateStructure // nested object / continuation
+    | ValidationStructure // nested object / continuation
   )
 }
 
@@ -123,10 +123,8 @@ const ValidateDataTypes = {
   'function': 'function',
 } as const
 
-export type ValidateDataType = keyof typeof ValidateDataTypes
+export type ValidationDataType = keyof typeof ValidateDataTypes
 
-export function isValidateDataType(
-  value: any,
-): value is ValidateDataType {
+export function isValidationDataType(value: string | null | undefined): value is ValidationDataType {
   return typeof value == 'string' && value in ValidateDataTypes
 }

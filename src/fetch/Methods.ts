@@ -21,6 +21,6 @@ export const Methods = {
 
 export type Method = typeof Methods[keyof typeof Methods]
 
-export function isMethod(value: any): value is Method {
+export function isMethod(value: string | null | undefined): value is Method {
   return typeof value == 'string' && value in Methods
 }

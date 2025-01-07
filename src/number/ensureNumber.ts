@@ -1,8 +1,7 @@
-import { isValidNumber } from './isValidNumber'
+import {isNumeric} from './isNumeric'
 
 export function ensureNumber(
-  value: any,
+  value: number | null | undefined,
 ): number {
-  if (!isValidNumber(value)) return 0
-  return value
+  return isNumeric(value) ? value : 0
 }

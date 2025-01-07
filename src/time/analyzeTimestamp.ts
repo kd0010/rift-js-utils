@@ -1,5 +1,5 @@
-import {MonthNames, isMonthNum} from './MonthNames'
-import {MonthShortNames} from './MonthShortNames'
+import {hourMilliseconds, minuteMilliseconds, secondMilliseconds} from './constants'
+import {getMonth, isMonthIndex} from './GregorianMonths'
 
 /**
  * Returns extensive information about the day
@@ -13,7 +13,7 @@ export function analyzeTimestamp(
   const date = new Date(timestamp)
   let
     year = 0,
-    month = 0,
+    monthIndex = 0,
     day = 0,
     hours = 0,
     minutes = 0,
@@ -23,7 +23,7 @@ export function analyzeTimestamp(
 
   if (isUTC) {
     year = date.getUTCFullYear()
-    month = date.getUTCMonth()
+    monthIndex = date.getUTCMonth()
     day = date.getUTCDate()
     hours = date.getUTCHours()
     minutes = date.getUTCMinutes()
@@ -31,7 +31,7 @@ export function analyzeTimestamp(
     milliseconds = date.getUTCMilliseconds()
   } else {
     year = date.getFullYear()
-    month = date.getMonth()
+    monthIndex = date.getMonth()
     day = date.getDate()
     hours = date.getHours()
     minutes = date.getMinutes()
@@ -40,26 +40,26 @@ export function analyzeTimestamp(
   }
 
   totalDayMilliseconds += milliseconds
-    + seconds * 1000
-    + minutes * 60000
-    + hours * 3600000
+    + seconds * secondMilliseconds
+    + minutes * minuteMilliseconds
+    + hours * hourMilliseconds
 
   let beginTime = timestamp - totalDayMilliseconds
 
   let shortDateText, longDateText
-  if (!isMonthNum(month)) {
+  if (!isMonthIndex(monthIndex)) {
     shortDateText = '–'
     longDateText = '–'
   } else {
-    shortDateText = `${MonthShortNames[month]} ${day}`
-    longDateText = `${MonthNames[month]} ${day}`
+    shortDateText = `${getMonth(monthIndex).abbr} ${day}`
+    longDateText = `${getMonth(monthIndex).name} ${day}`
   }
 
   return {
     beginTime,
     endTime: beginTime + 86400000,
     year,
-    month,
+    monthIndex,
     day,
     shortDateText,
     longDateText,
@@ -72,8 +72,7 @@ export interface Day {
   /** Non-inclusive last timestamp of the day. */
   endTime: number
   year: number
-  /** Indexed, starting from `0`. */
-  month: number
+  monthIndex: number
   day: number
   /** e.g. "Jan 16". */
   shortDateText: string

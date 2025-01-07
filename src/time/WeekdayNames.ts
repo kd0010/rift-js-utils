@@ -20,9 +20,9 @@ export const WeekdayNums = {
 export type WeekdayName = typeof WeekdayNames[keyof typeof WeekdayNames]
 export type WeekdayNum = typeof WeekdayNums[keyof typeof WeekdayNums]
 
-export function isWeekdayName(value: any): value is WeekdayName {
+export function isWeekdayName(value: string | null | undefined): value is WeekdayName {
   return typeof value == 'string' && value in WeekdayNums
 }
-export function isWeekdayNum(value: any): value is WeekdayNum {
+export function isWeekdayNum(value: number | null | undefined): value is WeekdayNum {
   return typeof value == 'number' && value in WeekdayNames
 }

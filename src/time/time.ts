@@ -1,8 +1,6 @@
-import {isMonthNum, MonthName, MonthNames} from './MonthNames'
-import {MonthShortName, MonthShortNames} from './MonthShortNames'
+import {getMonth, isMonthIndex, MonthAbbr, MonthName} from './GregorianMonths'
 import {isWeekdayNum, WeekdayName, WeekdayNames} from './WeekdayNames'
 import {hourMilliseconds, minuteMilliseconds} from './constants'
-import {ensureTimestampFormat} from './ensureTimestampFormat'
 
 export class TimeClass {
   #config: TimeConfig | null
@@ -14,14 +12,13 @@ export class TimeClass {
   defaultValue = '–'
 
   constructor(
+    /** Millisecond-timestamp. */
     value: number,
     config?: TimeConfig,
   ) {
     this.#config = config ?? null
     this.#timezoneOffsetHours = config?.timezoneOffsetHours ?? -1 * new Date(value).getTimezoneOffset() / 60
     this.#timezoneOffsetMs = this.#timezoneOffsetHours * hourMilliseconds
-
-    value = ensureTimestampFormat('millisecond', value)
 
     let localTzOffset = (new Date(value).getTimezoneOffset() * minuteMilliseconds)
     const tzOffsetValue = value + localTzOffset + this.#timezoneOffsetMs
@@ -152,13 +149,13 @@ export class TimeClass {
     return year
   }
 
-  #getMonthRepr(): MonthName | MonthShortName | null {
-    const monthNum = this.date.getMonth()
-    if (!isMonthNum(monthNum)) return null
+  #getMonthRepr(): MonthName | MonthAbbr | null {
+    const monthIndex = this.date.getMonth()
+    if (!isMonthIndex(monthIndex)) return null
 
     const monthName = this.#config?.useShortMonthNames
-      ? MonthShortNames[monthNum]
-      : MonthNames[monthNum]
+      ? getMonth(monthIndex).abbr
+      : getMonth(monthIndex).name
 
     return monthName
   }
@@ -191,10 +188,10 @@ export class TimeClass {
   }
 
   #formatNumber(
-    num: number,
+    number: number,
     useDoubleDigits?: boolean,
   ): string {
-    let st = String(num)
+    let st = String(number)
 
     if (
       (useDoubleDigits || this.#config?.useDoubleDigitsAlways) &&

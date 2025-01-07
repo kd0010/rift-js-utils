@@ -1,4 +1,4 @@
-import { mean } from './mean'
+import {mean} from './mean'
 
 export function variance(
   numbers: readonly number[],
