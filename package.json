@@ -1,9 +1,8 @@
 {
   "name": "rift-js-utils",
-  "version": "2.13.0",
+  "version": "2.13.5",
   "description": "",
   "license": "MIT",
-  "type": "module",
   "files": [
     "/array",
     "/constants",
@@ -16,17 +15,17 @@
     "/time"
   ],
   "scripts": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kd0010/rift-js-utils.git"
-  },
   "dependencies": {
     "@types/node-fetch": "^2.6.12",
     "node-fetch": "2.6.7",
     "preact": "^10.24.3"
   },
   "devDependencies": {
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.3"
   },
-  "packageManager": "pnpm@9.11.0+sha512.0a203ffaed5a3f63242cd064c8fb5892366c103e328079318f78062f24ea8c9d50bc6a47aa3567cabefd824d170e78fa2745ed1f16b132e16436146b7688f19b"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kd0010/rift-js-utils.git"
+  },
+  "packageManager": "pnpm@9.15.3+sha512.1f79bc245a66eb0b07c5d4d83131240774642caaa86ef7d0434ab47c0d16f66b04e21e0c086eb61e62c77efc4d7f7ec071afad3796af64892fae66509173893a"
 }
