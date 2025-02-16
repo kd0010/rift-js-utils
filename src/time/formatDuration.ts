@@ -14,7 +14,10 @@ export function formatDuration(
   value: string | number | Date,
   {
     highestMeasurement='weeks',
-    useDoubleDigitsHMS,
+    lowestMeasurement='seconds',
+    useDoubleDigitsHMS=false,
+    useNoWhitespace=false,
+    keepTrailingZeroUnits=false,
   }: FormatDurationOptions={},
 ): string {
   const repr = {
@@ -88,35 +91,66 @@ export function formatDuration(
 
   // Stitch together values into final string
   let product = ''
-  const getZeroHMS = (val: number) => (useDoubleDigitsHMS && val < 10) ? '0' : ''
-  const getSpace = (prevVal: number) => prevVal ? ' ' : ''
+  const getZeroHMS = (val: number, measurement: Measurement) => ((typeof useDoubleDigitsHMS == 'boolean' ? useDoubleDigitsHMS : useDoubleDigitsHMS[measurement]) && val < 10) ? '0' : ''
+  const getSpace = (prevVal: number) => (!useNoWhitespace && prevVal) ? ' ' : ''
 
-  if (wk) {
-    product += wk + repr.weeks
-  }
-  if (d) {
-    product += getSpace(wk) + d + repr.days
-  }
-  if (h) {
-    product += getSpace(d) + getZeroHMS(h) + h + repr.hours
-  }
-  if (m) {
-    product += getSpace(h) + getZeroHMS(m) + m + repr.minutes
-  }
-  if (s) {
-    product += getSpace(m) + getZeroHMS(s) + s + repr.seconds
-  }
+  let highestUnit: Measurement =
+    wk ? 'weeks' :
+    d ? 'days' :
+    h ? 'hours' :
+    m ? 'minutes' :
+    s ? 'seconds' :
+    'seconds'
+
+  if (
+    (wk || (keepTrailingZeroUnits && MeasurementEnum.weeks < MeasurementEnum[highestUnit])) &&
+    MeasurementEnum[lowestMeasurement] <= MeasurementEnum.weeks
+  ) product += wk + repr.weeks
+
+  if (
+    (d || (keepTrailingZeroUnits && MeasurementEnum.days < MeasurementEnum[highestUnit])) &&
+    MeasurementEnum[lowestMeasurement] <= MeasurementEnum.days
+  ) product += getSpace(wk) + d + repr.days
+
+  if (
+    (h || (keepTrailingZeroUnits && MeasurementEnum.hours < MeasurementEnum[highestUnit])) &&
+    MeasurementEnum[lowestMeasurement] <= MeasurementEnum.hours
+  ) product += getSpace(d) + getZeroHMS(h, 'hours') + h + repr.hours
+
+  if (
+    (m || (keepTrailingZeroUnits && MeasurementEnum.minutes < MeasurementEnum[highestUnit])) &&
+    MeasurementEnum[lowestMeasurement] <= MeasurementEnum.minutes
+  ) product += getSpace(h) + getZeroHMS(m, 'minutes') + m + repr.minutes
+
+  if (
+    (s || (keepTrailingZeroUnits && MeasurementEnum.seconds < MeasurementEnum[highestUnit])) &&
+    MeasurementEnum[lowestMeasurement] <= MeasurementEnum.seconds
+  ) product += getSpace(m) + getZeroHMS(s, 'seconds') + s + repr.seconds
 
   return product
 }
 
 export interface FormatDurationOptions {
-  /** Default: `weeks`. */
-  highestMeasurement?:
-    | 'weeks'
-    | 'days'
-    | 'hours'
-    | 'minutes'
-    | 'seconds'
-  useDoubleDigitsHMS?: boolean
+  /** @default 'weeks' */
+  highestMeasurement?: Measurement
+  /** @default 'seconds' */
+  lowestMeasurement?: Measurement
+  useDoubleDigitsHMS?: boolean | Partial<{[measurement in Measurement]: true}>
+  useNoWhitespace?: boolean
+  keepTrailingZeroUnits?: boolean
 }
+
+type Measurement =
+  | 'weeks'
+  | 'days'
+  | 'hours'
+  | 'minutes'
+  | 'seconds'
+
+const MeasurementEnum = {
+  'weeks': 90,
+  'days': 80,
+  'hours': 70,
+  'minutes': 60,
+  'seconds': 50,
+} as const
