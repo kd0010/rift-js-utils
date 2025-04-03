@@ -2,7 +2,7 @@ import {Headers} from 'node-fetch'
 import {isStatus} from './isStatus'
 import {Method} from './Methods'
 
-export async function fetch<T>(
+export async function fetch<S, F>(
   url: string,
   {
     body,
@@ -11,7 +11,7 @@ export async function fetch<T>(
     query,
     useNodeFetch=false,
   }: FetchOptions,
-): Promise<FetchResponse<T>> {
+): Promise<FetchResponse<S, F>> {
   let _fetch = useNodeFetch ? (await import('node-fetch')).default : globalThis.fetch
   let _headers: [string, string][] | undefined = headers != null ? Object.entries(headers) : undefined
   let _body: string | undefined = body ? JSON.stringify(body) : undefined
@@ -58,7 +58,7 @@ export async function fetch<T>(
   } catch (err) {
     return {
       ok: false,
-      data: null,
+      data: null as F,
       status: 400,
       headers: new globalThis.Headers(),
     }
@@ -67,9 +67,9 @@ export async function fetch<T>(
 
 export interface FetchOptions {
   method?: Method
-  query?: {[k: string]: string}
-  body?: {[k: string]: string}
-  headers?: {[k: string]: string}
+  query?: {[key: string]: string}
+  body?: {[key: string]: string}
+  headers?: {[key: string]: string}
   /** @default false */
   useNodeFetch?: boolean
 }
@@ -83,14 +83,14 @@ interface FetchResponseSuccess<D> {
 
 interface FetchResponseFail<D> {
   ok: false
-  data: unknown
+  data: D
   status: number
   headers: globalThis.Headers | Headers
 }
 
-export type FetchResponse<D> =
-  | FetchResponseSuccess<D>
-  | FetchResponseFail<D>
+export type FetchResponse<S, F> =
+  | FetchResponseSuccess<S>
+  | FetchResponseFail<F>
 
 /**
  * Developer friendly interface

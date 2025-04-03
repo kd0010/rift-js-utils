@@ -1,6 +1,6 @@
 {
   "name": "rift-js-utils",
-  "version": "2.13.5",
+  "version": "2.13.6",
   "description": "",
   "license": "MIT",
   "files": [
@@ -21,7 +21,7 @@
     "preact": "^10.24.3"
   },
   "devDependencies": {
-    "typescript": "^5.7.3"
+    "typescript": "^5.8.2"
   },
   "repository": {
     "type": "git",
