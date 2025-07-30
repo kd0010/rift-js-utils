@@ -4,6 +4,8 @@ import {joinWithSpaces} from '../../../string/joinWithSpaces'
 import {appendDivCss} from './appendDivCss'
 
 interface Props extends ComponentProps<'div'> {
+  width: string | number
+  height: string | number
   padding?: CSSProperties['padding']
   margin?: CSSProperties['margin']
   bg?: CSSProperties['backgroundColor']

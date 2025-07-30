@@ -1,6 +1,6 @@
 {
   "name": "rift-js-utils",
-  "version": "2.14.1",
+  "version": "2.15.0",
   "description": "",
   "license": "MIT",
   "files": [
@@ -16,16 +16,16 @@
   ],
   "scripts": {},
   "dependencies": {
-    "@types/node-fetch": "^2.6.12",
+    "@types/node-fetch": "^2.6.13",
     "node-fetch": "2.6.7",
-    "preact": "^10.24.3"
+    "preact": "^10.27.0"
   },
   "devDependencies": {
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.3"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kd0010/rift-js-utils.git"
   },
-  "packageManager": "pnpm@9.15.3+sha512.1f79bc245a66eb0b07c5d4d83131240774642caaa86ef7d0434ab47c0d16f66b04e21e0c086eb61e62c77efc4d7f7ec071afad3796af64892fae66509173893a"
+  "packageManager": "pnpm@10.12.4+sha512.5ea8b0deed94ed68691c9bad4c955492705c5eeb8a87ef86bc62c74a26b037b08ff9570f108b2e4dbd1dd1a9186fea925e527f141c648e85af45631074680184"
 }
