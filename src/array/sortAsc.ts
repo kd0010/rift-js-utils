@@ -3,7 +3,7 @@
  * based on a property that every object has.
  */
 export function sortAsc<T>(
-  arr: T[],
+  arr: Array<T>,
   propertyName: keyof T,
 ): void {
   arr.sort(

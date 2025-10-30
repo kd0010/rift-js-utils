@@ -5,7 +5,7 @@ import {isArray} from './isArray'
  */
 export function ensureArray<T=any>(
   string: string,
-): T[] | null {
+): Array<T> | null {
   try {
     const data = JSON.parse(string)
     if (isArray(data)) return data

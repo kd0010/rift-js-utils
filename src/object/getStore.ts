@@ -18,7 +18,7 @@ export function getStore(
   // Initialize listeners
   if (!Array.isArray(store._listeners[query])) store._listeners[query] = []
 
-  const listeners: StoreListener[] = store._listeners[query]
+  const listeners: Array<StoreListener> = store._listeners[query]
   const properties = query.split('/')
   const lastPropertyName = properties[properties.length - 1] ?? ''
 

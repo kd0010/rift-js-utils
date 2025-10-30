@@ -13,7 +13,7 @@ export async function fetch<S, F>(
   }: FetchOptions,
 ): Promise<FetchResponse<S, F>> {
   let _fetch = useNodeFetch ? (await import('node-fetch')).default : globalThis.fetch
-  let _headers: [string, string][] | undefined = headers != null ? Object.entries(headers) : undefined
+  let _headers: Array<[string, string]> | undefined = headers != null ? Object.entries(headers) : undefined
   let _body: string | undefined = body ? JSON.stringify(body) : undefined
 
   if (query) {

@@ -1,5 +1,5 @@
 export function sum(
-  numbers: readonly number[],
+  numbers: ReadonlyArray<number>,
 ): number {
   let sum = 0
   let len = numbers.length

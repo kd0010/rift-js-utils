@@ -1,7 +1,7 @@
 export function median(
-  numbers: readonly number[],
+  numbers: ReadonlyArray<number>,
 ): number {
-  let sorted = [...numbers].sort((a, b) => a - b)
+  let sorted = numbers.slice().sort((a, b) => a - b)
   let n = sorted.length
   let mid = Math.floor(n / 2)
 

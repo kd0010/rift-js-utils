@@ -1,5 +1,5 @@
 export function arrToObj<T, V>(
-  arr: T[],
+  arr: Array<T>,
   value?: V,
 ): {[k: string]: V extends (string | number | boolean | undefined | null | object) ? V : T} {
   const product: {[k: string]: V extends (string | number | boolean | undefined | null | object) ? V : T} = {}

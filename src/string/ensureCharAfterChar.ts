@@ -8,7 +8,7 @@ export function ensureCharAfterChar(
   desiredChar: string,
 ) {
   let stringParts = string.split(targetChar)
-  let newStringParts: string[] = []
+  let newStringParts: Array<string> = []
   let skipFirst = true
   for (let st of stringParts) {
     if (skipFirst) {

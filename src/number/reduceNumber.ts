@@ -1,10 +1,10 @@
 export function reduceNumber(
   number: number,
-): number[] {
+): Array<number> {
   if (number < 0) number = -number // make positive
 
   let accum: number = number
-  let chain: number[] = [accum]
+  let chain: Array<number> = [accum]
 
   while (accum > 9) {
     let nextAccum = 0

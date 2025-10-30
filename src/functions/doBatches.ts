@@ -4,7 +4,7 @@ import {sleep} from './sleep'
  * Execute multiple asynchronous functions at once, in batches.
  */
 export async function doBatches<T>(
-  data: T[],
+  data: Array<T>,
   onItem: DoBatchesOnItem<T>,
   {
     batchSize=4,
@@ -35,7 +35,7 @@ export async function doBatches<T>(
 
   let currentIdx = 0
   while (currentIdx < data.length) {
-    let batchPromises: Promise<void>[] = []
+    let batchPromises: Array<Promise<void>> = []
     for (let i = 0; (i < batchSize) && (currentIdx < data.length); ++i) {
       // Wait if halted
       await batchesHalt.checkAndWait()

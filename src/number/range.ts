@@ -2,7 +2,7 @@ import {max} from './max'
 import {min} from './min'
 
 export function range(
-  numbers: readonly number[],
+  numbers: ReadonlyArray<number>,
 ): number {
   return max(numbers) - min(numbers)
 }

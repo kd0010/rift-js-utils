@@ -4,8 +4,8 @@
 export function getIndicesOf(
   text: string,
   search: string | RegExp,
-): number[] {
-  const indices: number[] = []
+): Array<number> {
+  const indices: Array<number> = []
   if (!(search instanceof RegExp)) search = new RegExp(search, 'g')
   let match
 

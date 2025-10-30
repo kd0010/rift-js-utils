@@ -1,9 +1,9 @@
 export function modes(
-  numbers: readonly number[],
-): number[] {
+  numbers: ReadonlyArray<number>,
+): Array<number> {
   const map = new Map()
   let maxCount = 0
-  let modes: number[] = []
+  let modes: Array<number> = []
   let len = numbers.length
 
   for (let i = 0; i < len; ++i) {

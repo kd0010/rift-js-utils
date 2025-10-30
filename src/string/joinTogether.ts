@@ -6,7 +6,7 @@ import {joinWithChar} from './joinWithChar'
  * Ignores nullish values and empty strings.
  */
 export function joinTogether(
-  ...args: (string | number | false | undefined | null)[]
+  ...args: Array<string | number | false | undefined | null>
 ) {
   return joinWithChar('', ...args)
 }

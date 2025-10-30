@@ -4,10 +4,10 @@
  * const transposed = transposeArrays(obj) // [{name: 'John', age: 36}, {name: 'Matt', age: 24}]
  * ```
  */
-export function transposeArrays<T extends {[k: string]: any[]}>(
+export function transposeArrays<T extends {[k: string]: Array<any>}>(
   obj: T,
-): {[k in keyof T]: T[keyof T][number] | null}[] {
-  const product: {[k in keyof T]: T[keyof T][number] | null}[] = []
+): Array<{[k in keyof T]: T[keyof T][number] | null}> {
+  const product: Array<{[k in keyof T]: T[keyof T][number] | null}> = []
 
   const longestArrLength = Object.values(obj).reduce((length, arr) => {
     return arr.length > length ? arr.length : length

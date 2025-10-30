@@ -9,8 +9,8 @@
 export function moveArrItem(
   indexA: number,
   indexB: number,
-  arr: any[]
-): any[] {
+  arr: Array<any>
+): Array<any> {
   // Safeguards for when provided indices are bogus
   const isIndexValid = (index: number): boolean => {
     if (

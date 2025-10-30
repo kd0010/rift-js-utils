@@ -34,7 +34,7 @@ export function validate(
 
   function validateValueAgainstMany(
     value: any,
-    validators: ValidationDataType[] | any[],
+    validators: Array<ValidationDataType> | Array<any>,
   ): boolean {
     for (let validator of validators) {
       if (isValidationDataType(validator) && validateValue(value, validator)) {
@@ -48,7 +48,7 @@ export function validate(
   }
 
   let isObjectValid = true
-  const incorrectFields: string[] = []
+  const incorrectFields: Array<string> = []
   let currentBase: string = ''
   function _validate(
     target: {[k: string]: any},
@@ -100,8 +100,8 @@ export function validate(
 export interface ValidationStructure {
   [k: string]: (
     | ValidationDataType
-    | ValidationDataType[]
-    | any[]
+    | Array<ValidationDataType>
+    | Array<any>
     | RegExp
     | ValidationStructure // nested object / continuation
   )
@@ -109,7 +109,7 @@ export interface ValidationStructure {
 
 export interface ValidateResponse {
   isValid: boolean
-  incorrectFields: string[]
+  incorrectFields: Array<string>
 }
 
 const ValidateDataTypes = {

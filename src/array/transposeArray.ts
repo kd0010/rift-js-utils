@@ -7,9 +7,9 @@
  * ```
  */
 export function transposeArray<T extends {[k: string]: any}>(
-  arr: T[],
-): {[k: string]: (T[keyof T] | null)[]} {
-  const product: {[k: string]: (T[keyof T] | null)[]} = {}
+  arr: Array<T>,
+): {[k: string]: Array<T[keyof T] | null>} {
+  const product: {[k: string]: Array<T[keyof T] | null>} = {}
 
   for (const obj of arr) {
     // Initialize product object
